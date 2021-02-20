@@ -32,10 +32,13 @@ public class BankAccountController {
 
     @PostMapping
     public String registerCustomer(@ModelAttribute BankAccount customer, Model model) {
-
+        Customer matchingCustomer = customerService.findCustomer(customer.getId());
         //bankAccountService.createAccount(customer);
-        bankAccountService.createAccount(customer);
-        model.addAttribute("allAccount", bankAccountService.getAccount());
+        if(matchingCustomer != null){
+            bankAccountService.createAccount(customer);
+            model.addAttribute("allAccount", bankAccountService.getAccount());
+        }
+
 
         return "redirect:bankaccount";
     }
