@@ -37,6 +37,9 @@ public class BankAccountController {
         if(matchingCustomer != null){
             bankAccountService.createAccount(customer);
             model.addAttribute("allAccount", bankAccountService.getAccount());
+        }else {
+            model.addAttribute("greeting", "Can't find customer");
+            return "home";
         }
 
 
